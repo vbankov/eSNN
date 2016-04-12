@@ -2,8 +2,7 @@ source('main.R')
 
 ########################
 #
-# Dev Stuff Part II
-# WARNING: Delete before doing anything serious !
+# Demo of the ESNN
 #
 ########################
 
