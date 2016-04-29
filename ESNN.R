@@ -4,6 +4,8 @@
 # Description:
 #   Implementation of the Evolving Spiking Neural Network (eSNN) classification
 #   algorithm as introduced in REF.
+#
+# @author: Vasilis Bankov
 ##
 
 ESNN <- R6Class("ESNN",
@@ -119,6 +121,7 @@ ESNN <- R6Class("ESNN",
       # prepare results
       nb_correct <- 0
       classified_labels <- c()
+      resultsTable <- data.frame()
 
       # loop over all samples of the data set
       for(i in 1:length(samples[,1])){
@@ -142,7 +145,7 @@ ESNN <- R6Class("ESNN",
 
           ## store classification result
           classified_labels <- c(classified_labels, class_label)
-
+          resultsTable <- rbind(resultsTable, data.frame(testLabel, class_label, class_label == testLabel) )
           ## check the classification result
           #cat(paste('\nLabel: ',class_label, ' correct: ',testLabel, ' ',(class_label == testLabel) ))
           if(class_label == testLabel){
@@ -157,7 +160,10 @@ ESNN <- R6Class("ESNN",
       }
 
       ## return the list of classifications and the classification accuracy
-      return(list("classified_labels"=classified_labels, "accuracy"=nb_correct/length(data[,1])))
+      #return(list("classified_labels"=classified_labels, "accuracy"=nb_correct/length(data[,1])))
+      names(resultsTable) <- c('label','classified','result')
+      conf <- confusionMatrix(resultsTable$classified, resultsTable$label)
+      return(list(results=resultsTable, confusionMatrix=conf))
     }
 
   ),
