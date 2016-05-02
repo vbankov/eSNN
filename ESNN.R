@@ -163,7 +163,17 @@ ESNN <- R6Class("ESNN",
       #return(list("classified_labels"=classified_labels, "accuracy"=nb_correct/length(data[,1])))
       names(resultsTable) <- c('label','classified','result')
       conf <- confusionMatrix(resultsTable$classified, resultsTable$label)
-      return(list(results=resultsTable, confusionMatrix=conf))
+
+      confTable <- conf$table
+      precision <- NaN
+      if(dim(confTable)[[1]]<3){  # Only two classes are present, we'll calculate the precision
+        b<- confTable[1,2]
+        d<- confTable[2,2]
+        cat('2 classes found, appending precision')
+        precision <- d / (b+d)
+      }
+      accuracy <- conf$overall[[1]]
+      return(list(results=resultsTable, stats=conf, precision=precision, accuracy=accuracy))
     }
 
   ),
