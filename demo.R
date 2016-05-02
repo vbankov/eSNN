@@ -61,9 +61,9 @@ doTheTest <- function(datasetName, esnn){
     return(BCTestResults)
   }
 }
-cat('Testing on Iris dataset\n')
+cat('\nTesting on Iris dataset\n')
 i <- suppressWarnings(doTheTest('i'))
-cat(paste('Iris dataset done. Press `i$confusionMatrix` to view the results.\n'))
-cat('Testing on Spiral dataset\n')
+cat(paste('Iris dataset done. Use: \n\t`i$stats` for overall stats \n\t`i$precision` or `i$accuracy` \nto view the results.\n'))
+cat('\nTesting on Spiral dataset\n')
 s <- suppressWarnings(doTheTest('s'))
-cat(paste('Spiral dataset done. Press `s$confusionMatrix` to view the results.\n'))
+cat(paste('Spiral dataset done. Use: \n\t`s$stats` for overall stats \n\t`s$precision` or `s$accuracy` \nto view the results.\n'))

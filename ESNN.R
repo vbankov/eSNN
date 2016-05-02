@@ -169,7 +169,7 @@ ESNN <- R6Class("ESNN",
       if(dim(confTable)[[1]]<3){  # Only two classes are present, we'll calculate the precision
         b<- confTable[1,2]
         d<- confTable[2,2]
-        cat('2 classes found, appending precision')
+        cat('2 classes found, appending precision.\n')
         precision <- d / (b+d)
       }
       accuracy <- conf$overall[[1]]
